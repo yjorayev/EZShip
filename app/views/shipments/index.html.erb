@@ -1,0 +1,49 @@
+<div class="search">
+	<%= form_tag shipments_path, :method => "get" do %>
+		<%= text_field_tag :search, params[:search] %>
+		<%= submit_tag "Search", class: "btn-success" %>
+	<% end %>
+</div>
+<ul class= "nav nav-tabs">
+	<li class= 'active'>
+	<%= link_to "Shipments", shipments_path %>
+	</li>
+	<li>
+	<%= link_to "Trips", trips_path %>
+	</li>
+</ul>
+
+
+
+<div class="container">
+<div class="table-responsive col-md-11">
+<table>
+		<tr id="firstrow">
+			<th>Picture</th>
+			<th>Title</th>
+			<th>Pick up at</th>
+			<th>Drop off at</th>
+			<th>Customer</th>
+			<th>Updated</th>
+		</tr>
+		<% @shipments.each do |shipment| %>
+			<tr>
+				<td>
+					<%= image_tag(shipment.picture.url, size: "35", class: "picture") if shipment.picture? %>
+				</td>
+				<td><%= link_to shipment.title, shipment_path(shipment) %></td>
+				<td><%= shipment.pcity %>, <%= shipment.pstate %>, <%= shipment.pcountry%></td>
+				<td><%= shipment.dcity %>, <%= shipment.dstate %>, <%= shipment.dcountry%></td>
+				<td>
+					<section>
+						<%= image_tag(shipment.user.picture.url, size: "35", class: "picture") if shipment.user.picture? %>
+						<%= link_to [shipment.user.lastname, shipment.user.firstname].join(", "), user_path(shipment.user) %>
+					</section>
+				</td>
+				<td> <%= time_ago_in_words(shipment.updated_at) %> ago</td>
+			</tr>
+		<% end %>
+</table>
+</div>
+</div>
+<center><%= will_paginate %></center>

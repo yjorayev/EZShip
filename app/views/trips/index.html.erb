@@ -1,0 +1,49 @@
+<div class="search">
+	<%= form_tag trips_path, :method => "get" do %>
+		<%= text_field_tag :search, params[:search] %>
+		<%= submit_tag "Search", class: "btn-success" %>
+	<% end %>
+</div>
+
+<ul class= "nav nav-tabs">
+	<li>
+	<%= link_to "Shipments", shipments_path %>
+	</li>
+	<li class= 'active'>
+	<%= link_to "Trips", trips_path %>
+	</li>
+</ul>
+
+<div class="container">
+<div class="table-responsive col-md-11">
+<table>
+		<tr id="firstrow">
+			<th>Trip #</th>
+			<th>Pick up at</th>
+     		<th>Drop off at</th>
+			<th>Date</th>
+			<th>Carrier</th>
+			<th>Updated</th>
+		</tr>
+		<% @trips.each do |trip| %>
+			<tr>
+				<td><%= link_to trip.id, trip_path(trip) %></td>
+				<td><%= trip.icity %>, <%= trip.istate %>, <%= trip.icountry%></td>
+				<td><%= trip.fcity %>, <%= trip.fstate %>, <%= trip.fcountry%></td>
+				<td><%= trip.month%>-<%= trip.day%>-<%= trip.year%></td>
+				<td>
+					<section>
+						<%= image_tag(trip.user.picture.url, size: "35", class: "picture") if trip.user.picture? %>
+						<%= link_to [trip.user.lastname, trip.user.firstname].join(", "), user_path(trip.user) %>
+					</section>
+				</td>
+        		<td><%= time_ago_in_words(trip.updated_at) %> ago</td>
+			</tr>
+		<% end %>
+</table>
+</div>
+</div>
+
+<center><%= will_paginate %></center>
+
+

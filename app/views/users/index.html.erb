@@ -1,0 +1,42 @@
+<div class="search">
+	<%= form_tag users_path, :method => "get" do %>
+		<%= text_field_tag :search, params[:search] %>
+		<%= submit_tag "Search", class: "btn-success" %>
+	<% end %>
+</div>
+
+<div class="container">
+<div class="table-responsive col-md-11">
+<table >
+		<tr id="firstrow">
+			<th>Avatar</th>
+			<th>First name</th>
+			<th>Last name</th>
+			<th>E-mail</th>
+			<th>Phone number</th>
+			<th>Role</th>
+			<th>Rating</th>
+			<th>Registration time</th>
+			<th>Last update</th>
+		</tr>
+		<% @users.each do |user| %>
+			<tr>
+				<td>
+					<section>
+						<%= image_tag(user.picture.url, size: "35", class: "picture") if user.picture? %>
+					</section>
+				</td>
+				<td><%= user.firstname%></td>
+				<td><%= user.lastname%></td>
+				<td><%= link_to user.email, user_path(user)%></td>
+				<td><%= user.phone%></td>
+				<td><%= user.role%></td>
+				<td><%= user.rating%></td>
+				<td><%= user.created_at.to_formatted_s(:long_ordinal)%></td>
+				<td><%= user.updated_at.to_formatted_s(:long_ordinal)%></td>
+			</tr>
+		<% end %>
+</table>
+</div>
+</div>
+<center><%= will_paginate %></center>

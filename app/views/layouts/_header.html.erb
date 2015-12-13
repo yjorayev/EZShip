@@ -1,0 +1,41 @@
+<header class="navbar navbar-fixed-top col-md-10 col-md-offset-1">
+
+		<%= link_to "EzShip", root_path, class: "btn btn-success" , id: "logo" %>	
+		
+		<% if logged_in? %>
+			
+			<div class="nav-item">
+				<ul class="dropdown">
+					<%= link_to "#", class: "btn btn-default btn-primary dropdown-toggle", "data-toggle"=>"dropdown" do%>
+						<%= current_user.firstname %><b class="caret"></b>
+					<% end %>
+					<ul class="dropdown-menu">
+						<li><%= link_to "View Profile", user_path(current_user)%></li>
+						<li><%= link_to "Edit Profile", edit_user_path(current_user)%></li>
+						<li class="divider"></li>
+						<li><%= link_to "Log Out", logout_path %></li>
+					</ul>
+				</ul>
+			</div>
+			<div class="nav-item">
+				<%= link_to "New Trip Information", new_trip_path, class: "btn btn-default" %>
+			</div>
+			<div class="nav-item">
+				<%= link_to "New Shipment Request", new_shipment_path, class: "btn btn-default" %>
+			</div>
+		<% else %>
+			<div class="nav-item">
+				<%= link_to "Log In", login_path, class: "btn btn-default" %>
+			</div>
+			<div class="nav-item">
+				<%= link_to "Register", register_path, class: "btn btn-default " %>
+			</div>
+		<% end %>
+		<div class="nav-item">
+			<%= link_to "Trips", trips_path, class: "btn btn-default " %>
+		</div>
+		<div class="nav-item">
+			<%= link_to "Shipments", shipments_path, class: "btn btn-default " %>
+		</div>
+		
+</header>

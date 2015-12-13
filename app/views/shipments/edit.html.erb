@@ -1,0 +1,80 @@
+<p>
+	<h1>Edit Shipment</h1>
+	<hr/>
+</p>
+
+<div class="row">
+	<div class="well col-md-8 col-md-offset-2">
+		<%= form_for(@shipment, html: { multipart:true }, validate: true) do |s| %>
+			<%= s.label :title %><br />
+			<%= s.text_field :title %><br />
+
+			<%= s.label :pcountry, "Pick Up: Country"%><br />
+			<%= s.country_select :pcountry %><br />
+
+			<%= s.label :pstate, "Pick Up: State" %><br />
+			<%= s.text_field :pstate %><br />
+
+			<%= s.label :pcity, "Pick Up: City" %><br />
+			<%= s.text_field :pcity %><br />
+
+			<%= s.label :paddress, "Pick Up: Address" %><br />
+			<%= s.text_field :paddress %><br />
+
+			<%= s.label :pzipcode, "Pick Up: Zip Code" %><br />
+			<%= s.text_field :pzipcode %><br />
+
+			<%= s.label :dcountry, "Drop Off: Country" %><br />
+			<%= s.country_select :dcountry %><br />
+
+			<%= s.label :dstate, "Drop Off: State" %><br />
+			<%= s.text_field :dstate %><br />
+
+			<%= s.label :dcity, "Drop Off: City" %><br />
+			<%= s.text_field :dcity %><br />
+
+			<%= s.label :daddress, "Drop Off: Address" %><br />
+			<%= s.text_field :daddress %><br />
+
+			<%= s.label :dzipcode, "Drop Off: Zip Code" %><br />
+			<%= s.text_field :dzipcode %><br />
+
+			<%= s.label :weight, "Weight (lbs)" %><br />
+			<%= s.text_field :weight %><br />
+
+			<%= s.label :width, "Width (ft)" %><br />
+			<%= s.text_field :width %><br />
+
+			<%= s.label :length, "Length (ft)" %><br />
+			<%= s.text_field :length %><br />
+
+			<%= s.label :heigth, "Height (ft)" %><br />
+			<%= s.text_field :heigth %><br />
+
+			<%= s.label :delday, "Delivery Day" %><br />
+			<%= s.text_field :delday %><br />
+
+			<%= s.label :delmonth, "Delivery Month" %><br />
+			<%= s.text_field :delmonth %><br />
+
+			<%= s.label :delyear, "Delivery Year" %><br />
+			<%= s.text_field :delyear %><br />
+
+			<span class="picture">
+        		<%= s.file_field :picture, accept: "image/jpeg,image/gif,image/png" %>
+      		</span>
+
+			<%= s.submit "Edit Shipment", class: "btn btn-success" %>
+		<% end %>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$("#shipment_picture").bind("change", function(){
+		size.in_megabytes = this.files[0].size/1024/1024;
+		if (size_in_megabytes > 3){
+			alert("Maximun file size is 3 Mb, please choose smaller file.")
+		}
+	});
+</script>

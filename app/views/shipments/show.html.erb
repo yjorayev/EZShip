@@ -1,0 +1,65 @@
+<div class= "row text-center">
+	<p>
+		<h1><%= @shipment.title %></h1>
+	</p>
+	<hr>
+	<div class= "col-md-4">
+		<font1>&emsp;&emsp;&emsp;&emsp;Item Picture&emsp;&emsp;&emsp;&emsp;</font1><br><br>
+		<div class="well image"><%= image_tag(@shipment.picture.url, size: "200", class: "picture") if @shipment.picture? %></div>
+	</div>
+	<div class= "col-md-4">
+		<font1>&emsp;&emsp;&emsp;&emsp;Item Information&emsp;&emsp;&emsp;&emsp;</font1><br><br>
+		<dl class= "dl-horizontal text-left">
+			<dt>Shipment Name</dt><dd><%= @shipment.title %></dd>
+			<dt>Weight</dt><dd><%= @shipment.weight %> lbs</dd>
+			<dt>Height</dt><dd><%= @shipment.heigth %> ft</dd>
+			<dt>Width</dt><dd><%= @shipment.width %> ft</dd>
+			<dt>Length</dt><dd><%= @shipment.length %> ft</dd>
+			<dt>Delivery Date</dt><dd><%= @shipment.delmonth %> <%= @shipment.delday %>, <%= @shipment.delyear %></dd>
+		</dl>
+	</div>
+	<div class= "col-md-4">
+		<font1>&emsp;&emsp;&emsp;Customer Information&emsp;&emsp;&emsp;</font1><br><br>
+		<dl class= "dl-horizontal text-left">
+			<dt>Name</dt><dd><%= link_to [@shipment.user.lastname, @shipment.user.firstname].join(", "), user_path(@shipment.user) %></dd>
+			<dt>Email</dt><dd><%= @shipment.user.email %></dd>
+			<dt>Phone</dt><dd><%= @shipment.user.phone %></dd>
+			<dt>Comments</dt><dd><%= @shipment.user.reviews.count %></dd>
+		</dl>
+	</div>
+</div>
+<hr>
+<div class= "row text-center">
+	<div class= "col-md-6 col-md-push-1">
+		<font1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pickup Location&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</font1><br><br>
+		<dl class= "dl-horizontal text-left col-md-offset-2">
+			<dt>Address Line</dt><dd><%= @shipment.paddress %></dd>
+			<dt>Address Line 2</dt><dd><%= @shipment.pcity %>, <%= @shipment.pstate %>, <%= @shipment.pzipcode %>, <%= @shipment.pcountry %></dd>
+		</dl>
+	</div>
+	<div class= "col-md-6 col-md-pull-1">
+		<font1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Drop-off Location&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</font1><br><br>
+		<dl class= "dl-horizontal text-left col-md-offset-2">
+			<dt>Address Line</dt><dd><%= @shipment.daddress %></dd>
+			<dt>Address Line 2</dt><dd><%= @shipment.dcity %>, <%= @shipment.dstate %>, <%= @shipment.dzipcode %>, <%= @shipment.dcountry %></dd>
+		</dl>
+	</div>
+
+<br><small>Date Listed: <%= @shipment.created_at %><br>
+Date Updated: <%= @shipment.updated_at %></small><br>
+
+<br>
+
+<h5 class="text-center">
+	<% if logged_in? and @shipment.user == current_user || current_user.admin? %>
+		<%= link_to "Delete Shipment", @shipment, method: :Delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-small" %>
+	<% end %>
+	<% if logged_in? and @shipment.user == current_user || current_user.admin? %>
+		<%= link_to "Edit Shipment", edit_shipment_path, class: "btn btn-warning btn-small" %>
+	<% end %>
+	<%= link_to "Return to Shipments Listing", shipments_path, class: "btn btn-warning btn-small" %>
+</h5>
+
+</div>
+
+

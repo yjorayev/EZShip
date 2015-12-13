@@ -1,0 +1,45 @@
+<p>
+	<h1>New User Registration</h1>
+	<hr/>
+</p>
+
+<div class="row">
+	<div class="well col-md-8 col-md-offset-2">
+		<%= form_for(@user, html: { multipart:true }, validate: true) do |s| %>
+			<%= s.label :firsname %><br />
+			<%= s.text_field :firstname %><br />
+
+			<%= s.label :lastname %><br />
+			<%= s.text_field :lastname %><br />
+
+			<%= s.label :email %><br />
+			<%= s.email_field :email %><br />
+
+			<%= s.label :phone %><br />
+			<%= s.text_field :phone %><br />
+
+			<%= s.label :password_confirmation, "Password"%><br />
+			<%= s.password_field :password_confirmation %><br />
+
+			<%= s.label :password, "Confirm Password"%><br />
+			<%= s.password_field :password %><br />
+
+			<span class="picture">
+        		<%= s.file_field :picture, accept: "image/jpeg,image/gif,image/png" %>
+      		</span>
+
+			<%= s.submit "Register", class: "btn btn-success" %>
+		<% end %>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+	$("#user_picture").bind("change", function(){
+		size.in_megabytes = this.files[0].size/1024/1024;
+		if (size_in_megabytes > 3){
+			alert("Maximun file size is 3 Mb, please choose smaller file.")
+		}
+	});
+</script>

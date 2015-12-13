@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EZShip</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  <div class=" col-md-10 col-md-offset-1 main">
+    <%= render "layouts/header"%>
+    <%= render "layouts/messages"%>
+    <div id="content">
+      <%= yield %>
+    </div>
+  </div>
+  <%= render "layouts/footer"%>
+</body>
+
+</html>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+  		setTimeout(function(){
+    		$('.alert').remove();
+  		}, 5000);
+ 	})
+</script>

@@ -1,0 +1,82 @@
+<p>
+  <h1>Edit Trip</h1>
+  <hr/>
+</p>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for(@trip, html:{multipart:true}, validate: true) do |f| %>
+
+      <h3>Initial Location</h3>
+
+      <%= f.label :icountry, "Country" %><br />
+      <%= f.country_select :icountry %><br /> 
+
+      <%= f.label :istate, "State" %><br />
+      <%= f.text_field :istate %><br /> 
+
+      <%= f.label :icity, "City" %><br />
+      <%= f.text_field :icity %><br /> 
+
+      <%= f.label :iaddress, "Address" %><br />
+      <%= f.text_field :iaddress %><br /> 
+
+      <%= f.label :izipcode, "Zipcode" %><br />
+      <%= f.text_field :izipcode %><br /> 
+
+      <h3>Final Location</h3>
+
+      <%= f.label :fcountry, "Country" %><br />
+      <%= f.country_select :fcountry %><br /> 
+
+      <%= f.label :fstate, "State" %><br />
+      <%= f.text_field :fstate %><br /> 
+
+      <%= f.label :fcity, "City" %><br />
+      <%= f.text_field :fcity %><br /> 
+
+      <%= f.label :faddress, "Address" %><br />
+      <%= f.text_field :faddress %><br /> 
+
+      <%= f.label :fzipcode, "Zipcode" %><br />
+      <%= f.text_field :fzipcode %><br /> 
+
+      <h3>Trip date</h3>
+
+      <%= f.label :day, "Day" %><br />
+      <%= f.text_field :day %><br /> 
+
+      <%= f.label :month, "Month" %><br />
+      <%= f.text_field :month %><br /> 
+
+      <%= f.label :year, "Year" %><br />
+      <%= f.text_field :year %><br /> 
+
+      <h3>Accepted item parameters</h3>
+
+      <%= f.label :maxweight, "Maximum weight (lbs)" %><br />
+      <%= f.text_field :maxweight %><br /> 
+     
+      <%= f.label :maxwidth, "Maximum width (ft)" %><br />
+      <%= f.text_field :maxwidth %><br /> 
+
+      <%= f.label :maxlength, "Maximum length (ft)" %><br />
+      <%= f.text_field :maxlength %><br />
+
+      <%= f.label :maxheigth, "Maximum heigth (ft)" %><br />
+      <%= f.text_field :maxheigth %><br /> 
+
+      <%= f.submit 'Edit Trip', class: "btn btn-success" %>
+    <% end %> 
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  $("#trip_picture").bind("change", function(){
+    size.in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 3){
+      alert("Maximun file size is 3 Mb, please choose smaller file.")
+    }
+  });
+</script>

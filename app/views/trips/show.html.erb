@@ -1,0 +1,61 @@
+<div class= "row text-center">
+  <p>
+    <h1><%= @trip.icity %> to <%=@trip.fcity %></h1>
+  </p>
+  <hr>
+  <div class= "col-md-4">
+    <font1>&emsp;&emsp;&emsp;&emsp;Carrier Picture&emsp;&emsp;&emsp;&emsp;</font1><br><br>
+    <div class="well image"><%= image_tag(@trip.user.picture, size: "200", class: "picture") if @trip.user.picture? %></div>
+  </div>
+  <div class= "col-md-4">
+    <font1>&emsp;&emsp;&emsp;&emsp;Restrictions and Trip Date&emsp;&emsp;&emsp;&emsp;</font1><br><br>
+    <dl class= "dl-horizontal text-left">
+      <dt>Maximum Weight</dt><dd><%= @trip.maxweight %> lbs</dd>
+      <dt>Maximum Height</dt><dd><%= @trip.maxheigth %> ft</dd>
+      <dt>Maximum Width</dt><dd><%= @trip.maxwidth %> ft</dd>
+      <dt>Maximum Length</dt><dd><%= @trip.maxlength %> ft</dd>
+      <dt>Trip Date</dt><dd><%= @trip.month %> <%= @trip.day %>, <%= @trip.year %></dd>
+    </dl>
+  </div>
+  <div class= "col-md-4">
+    <font1>&emsp;&emsp;&emsp;Carrier Information&emsp;&emsp;&emsp;</font1><br><br>
+    <dl class= "dl-horizontal text-left">
+      <dt>Name</dt><dd><%= link_to [@trip.user.lastname, @trip.user.firstname].join(", "), user_path(@trip.user) %></dd>
+      <dt>Email</dt><dd><%= @trip.user.email %></dd>
+      <dt>Phone</dt><dd><%= @trip.user.phone %></dd>
+      <dt>Comments</dt><dd><%= @trip.user.reviews.count %></dd>
+    </dl>
+  </div>
+</div>
+<hr>
+<div class= "row text-center">
+  <div class= "col-md-6 center  col-md-push-1">
+    <font1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Initial Location&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</font1><br><br>
+    <dl class= "dl-horizontal text-left col-md-offset-2">
+      <dt>Address Line</dt><dd><%= @trip.iaddress %></dd>
+      <dt>Address Line 2</dt><dd><%= @trip.icity %>, <%= @trip.istate %>, <%= @trip.icountry %> <%= @trip.izipcode %></dd>
+    </dl>
+  </div>
+  <div class= "col-md-6 center col-md-pull-1">
+    <font1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Final Destination&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</font1><br><br>
+    <dl class= "dl-horizontal text-left col-md-offset-2">
+      <dt>Address Line</dt><dd><%= @trip.faddress %></dd>
+      <dt>Address Line 2</dt><dd><%= @trip.fcity %>, <%= @trip.fstate %>, <%= @trip.fcountry %> <%= @trip.fzipcode %></dd>
+    </dl>
+  </div>
+  <br><small>Date Listed: <%= @trip.created_at %><br>
+Date Updated: <%= @trip.updated_at %></small><br>
+
+<h5 class="text-center">
+  <% if logged_in? and @trip.user == current_user || current_user.admin? %>
+    <%= link_to "Delete Trip", @trip, method: :Delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-small" %>
+  <% end %>
+  <% if logged_in? and @trip.user == current_user || current_user.admin? %>
+    <%= link_to "Edit Trip", edit_trip_path, class: "btn btn-warning btn-small" %>
+  <% end %>
+  <%= link_to "Return to Trips Listing", trips_path, class: "btn btn-warning btn-small" %>
+</h5>
+
+</div>
+
+
